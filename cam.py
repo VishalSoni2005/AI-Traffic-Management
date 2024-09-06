@@ -1,30 +1,49 @@
 import cv2
+import time
 
-# Open the video stream from the IP camera
-cap = cv2.VideoCapture(1)
+video = 'http://192.168.0.106:8080/video'
 
-# Check if the stream opened successfully
-if not cap.isOpened():
-    print("Error: Could not open video stream.")
-    exit()
+haar_cascade = 'cars.xml'
+count = 0
+detect = []
+offset = 6
+cap = cv2.VideoCapture('videoc.mp4')
+car_cascade = cv2.CascadeClassifier(haar_cascade)
+frame_count = 0
+def center_handle(x, y, w, h):
+    cx = x + int(w / 2)
+    cy = y + int(h / 2)
+    return cx, cy
 
-# Continuously capture frames from the camera
-while True:
-    # Capture frame-by-frame
-    ret, frame = cap.read()
+    # loop runs if capturing has been initialized.
+    start = int(time.perf_counter())
 
-    # If the frame was not captured properly, break the loop
-    if not ret:
-        print("Error: Failed to capture image.")
-        break
+    
+        # reads frames from a video
+ret, frames = cap.read()
 
-    # Display the captured frame
-    cv2.imshow('Camera Capture', frame)
-
-    # Break the loop if the 'q' key is pressed
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
-
-# Release the video capture object and close all OpenCV windows
-cap.release()
-cv2.destroyAllWindows()
+gray = cv2.cvtColor(frames, cv2.COLOR_BGR2GRAY)
+cars = car_cascade.detectMultiScale(gray, 1.1, 1)
+cv2.line(frames, (25, 550), (1200, 550), (255, 127, 0), 2)
+if frame_count==0:
+    for (x,y,w,h) in cars:
+        validate_count = (w >= 80) and (h >= 80)
+        if not validate_count:
+            continue
+        cv2.rectangle(frames, (x, y), (x + w, y + h), (0, 255, 0), 2)
+        center = center_handle(x, y, w, h)
+        detect.append(center)
+        cv2.circle(frames, center, 4, (0, 0, 255), -1)
+        for (x, y) in detect:
+            count += 1
+            cv2.line(frames, (25, 550), (1200, 550), (0, 127, 255), 3)
+            detect.remove((x, y))
+            print("Vehicle count: " + str(count))
+    cv2.putText(frames, "VEHICLE count: " + str(count), (50, 70), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 0, 255), 5)
+    cv2.imshow('Original Video', frames)
+    frame_count +=1
+# De-allocate any associated memory usage
+    end_time = time.perf_counter()
+    cv2.destroyAllWindows()
+    print(count)
+        

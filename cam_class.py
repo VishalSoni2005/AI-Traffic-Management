@@ -5,12 +5,12 @@ class cam_class:
     video = 'video2.mp4'
     def __init__(self,video):
         self.video = video
-    def count_car():
+    def count_car(self):
         haar_cascade = 'cars.xml'
         count = 0
         detect = []
         offset = 6
-        cap = cv2.VideoCapture(video)
+        cap = cv2.VideoCapture(self.video)
         car_cascade = cv2.CascadeClassifier(haar_cascade)
         frame_count = 0
         def center_handle(x, y, w, h):
