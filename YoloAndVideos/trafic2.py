@@ -18,7 +18,7 @@ custom_labels = {
 vpath = 'toytraffic.mp4'
 
 # Open the video file
-cap = cv2.VideoCapture(vpath)
+cap = cv2.VideoCapture('https://192.168.0.106:8080/video')
 
 # Check if video opened successfully
 if not cap.isOpened():
