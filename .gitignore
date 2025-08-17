@@ -1,0 +1,57 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+.env/
+.venv/
+env/
+ENV/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Logs
+*.log
+logs/
+runs/
+
+# YOLO model weights and training files
+*.pt
+*.pth
+*.onnx
+*.engine
+*.tflite
+*.pb
+*.weights
+
+# Dataset and large media files
+datasets/
+data/
+*.zip
+*.tar
+*.gz
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# IDE specific
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Cache and temporary
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# Python packaging
+build/
+dist/
+*.egg-info/
+wpa_supplicant.conf
