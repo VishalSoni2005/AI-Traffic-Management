@@ -25,15 +25,13 @@ We introduce a **“White Light” Traffic Signal Concept** – when a priority 
 
 ```
 📂 AI-Traffic-Management
-├── 📂 Test_Videos/          # Sample traffic video footage
+├── 📂 Test_Resource/          # Sample traffic video footage
 ├── 📂 traffic/              # Traffic signal control scripts
-│   ├── cars.xml
 │   ├── edit1_vehicle.py
 │   ├── led_on.py
 │   ├── newtrafic.py
 │   └── traffic.py
 ├── 📂 Yolo/                 # YOLO detection & model scripts
-│   ├── ambulance.xml
 │   ├── cam.py
 │   ├── cam_class.py
 │   ├── traffic_main.py
